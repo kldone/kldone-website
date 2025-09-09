@@ -108,10 +108,10 @@ body::before {
 
 .video-container {
   position: relative;
-  padding-bottom: 42.18%; /* 21:9 aspect ratio - wider, saves vertical space */
+  padding-bottom: 38.78%; /* Correct 16:9 aspect ratio */
   height: 0;
   margin-bottom: 2rem;
-  max-width: 600px; /* Smaller max width to save space */
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;

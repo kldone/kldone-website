@@ -1,0 +1,191 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Background image now set in HTML inline style */
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  min-height: 100vh;
+  
+  /* Dark overlay to make text readable */
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+/* Main container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hero section */
+.hero {
+  margin-bottom: 3rem;
+}
+
+.game-title {
+  font-size: 4rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+/* Game pitch */
+.pitch {
+  margin-bottom: 3rem;
+  max-width: 800px;
+}
+
+.game-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Steam button */
+.steam {
+  margin-bottom: 4rem;
+}
+
+.steam-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  text-decoration: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.steam-button:hover {
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Videos section */
+.videos {
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.videos h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 42.18%; /* 21:9 aspect ratio - wider, saves vertical space */
+  height: 0;
+  margin-bottom: 2rem;
+  max-width: 600px; /* Smaller max width to save space */
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  border: 3px solid #8B0000; /* Dark red border */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Contact */
+.contact {
+  margin-top: 2rem;
+}
+
+.contact p {
+  font-size: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.contact a {
+  color: #87ceeb;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 2.5rem;
+  }
+  
+  .game-description {
+    font-size: 1rem;
+  }
+  
+  .videos h2 {
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+  
+  /* Mobile: background-attachment: fixed can cause issues */
+  body {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .game-title-image {
+    max-height: 150px; /* Even smaller on very small screens */
+  }
+  
+  .steam-button {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+  
+  .video-container iframe {
+    height: 250px; /* Smaller for very small screens */
+  }
+}

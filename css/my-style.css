@@ -108,10 +108,10 @@ body::before {
 
 .video-container {
   position: relative;
-  padding-bottom: 38.78%; /* Correct 16:9 aspect ratio */
-  height: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* modern CSS, no padding hack needed */
   margin-bottom: 2rem;
-  max-width: 800px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
@@ -184,8 +184,5 @@ body::before {
     padding: 12px 24px;
     font-size: 1rem;
   }
-  
-  .video-container iframe {
-    height: 250px; /* Smaller for very small screens */
-  }
+
 }

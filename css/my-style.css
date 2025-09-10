@@ -111,7 +111,7 @@ body::before {
   width: 100%;
   aspect-ratio: 16 / 9; /* modern CSS, no padding hack needed */
   margin-bottom: 2rem;
-  max-width: 1200px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;

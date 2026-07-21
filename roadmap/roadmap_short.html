@@ -8,13 +8,13 @@
   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Share+Tech+Mono&family=Source+Sans+3:wght@300;400;600&display=swap');
 
   :root {
-    --bg:        #0d0d0d;
-    --surface:   #141414;
-    --border:    #222;
+    --bg:        #1c1c1c;
+    --surface:   #272727;
+    --border:    #3a3a3a;
     --blood:     #8B0000;
     --blood-mid: #B22222;
     --bone:      #d4c5a9;
-    --bone-dim:  #7a6a52;
+    --bone-dim:  #8a7a62;
     --white:     #f0ece4;
     --done:      #4a9e6a;
     --partial:   #c9a84c;
@@ -26,7 +26,8 @@
     background: var(--bg);
     font-family: 'Source Sans 3', sans-serif;
     font-weight: 300;
-    padding: 32px;
+    font-size: 22px;
+    padding: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,9 +36,9 @@
 
   /* OUTER BOX */
   .roadmap {
-    width: 1060px;
+    width: 1590px;
     background: var(--surface);
-    border: 1px solid #222;
+    border: 1px solid var(--border);
     border-top: 3px solid var(--blood);
     overflow: hidden;
   }
@@ -47,15 +48,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 24px 12px;
+    padding: 22px 40px 20px;
     border-bottom: 1px solid var(--border);
-    background: #111;
+    background: #222;
   }
 
   .rm-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    font-size: 15pt;
+    font-size: 28pt;
     letter-spacing: 0.2em;
     color: var(--white);
     text-shadow: 0 0 20px rgba(139,0,0,0.4);
@@ -63,14 +64,14 @@
 
   .rm-sub {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 8.5pt;
+    font-size: 13pt;
     letter-spacing: 0.3em;
     color: var(--blood-mid);
   }
 
   .rm-tag {
     font-family: 'Oswald', sans-serif;
-    font-size: 9pt;
+    font-size: 14pt;
     letter-spacing: 0.2em;
     color: var(--partial);
     text-transform: uppercase;
@@ -79,12 +80,12 @@
   /* COLUMNS */
   .rm-cols {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     border-top: none;
   }
 
   .col {
-    padding: 16px 18px;
+    padding: 24px 28px;
     border-right: 1px solid var(--border);
   }
 
@@ -93,41 +94,41 @@
   .col-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
-    font-size: 8.5pt;
+    font-size: 14pt;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--blood-mid);
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #1e1e1e;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
   }
 
   /* ITEMS */
   .item {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 7px;
+    gap: 12px;
+    margin-bottom: 11px;
   }
 
   .item:last-child { margin-bottom: 0; }
 
   .dot {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 700;
   }
 
   .dot.done {
     background: var(--done);
-    box-shadow: 0 0 6px rgba(74,158,106,0.3);
+    box-shadow: 0 0 8px rgba(74,158,106,0.3);
   }
   .dot.done::after { content: '✓'; color: #000; }
 
@@ -135,15 +136,15 @@
     background: transparent;
     border: 2px solid var(--partial);
   }
-  .dot.partial::after { content: '◐'; color: var(--partial); font-size: 8px; }
+  .dot.partial::after { content: '◐'; color: var(--partial); font-size: 11px; }
 
   .dot.todo {
     background: transparent;
-    border: 2px solid #2e2e2e;
+    border: 2px solid #555;
   }
 
   .label {
-    font-size: 12px;
+    font-size: 17px;
     color: var(--bone);
     line-height: 1.4;
   }
@@ -152,28 +153,28 @@
 
   .label small {
     display: block;
-    font-size: 10px;
-    color: #4a4a4a;
+    font-size: 13px;
+    color: #555;
     font-family: 'Share Tech Mono', monospace;
-    margin-top: 1px;
+    margin-top: 2px;
   }
 
   /* LEGEND */
   .rm-legend {
     display: flex;
-    gap: 20px;
-    padding: 10px 24px;
+    gap: 28px;
+    padding: 14px 40px;
     border-top: 1px solid var(--border);
-    background: #0f0f0f;
+    background: #1e1e1e;
     justify-content: flex-end;
   }
 
   .legend-item {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
+    font-size: 13px;
     color: var(--bone-dim);
     letter-spacing: 0.05em;
   }
@@ -198,8 +199,8 @@
     <!-- COL 1: ARENAS -->
     <div class="col">
       <div class="col-title">Arenas</div>
-      <div class="item"><div class="dot done"></div><div class="label dim">Arena 1 — Hellscape<small>done</small></div></div>
-      <div class="item"><div class="dot partial"></div><div class="label">Arena 2 — Palace<small>in progress</small></div></div>
+      <div class="item"><div class="dot done"></div><div class="label dim">Arena 1 — Hellscape</div></div>
+      <div class="item"><div class="dot partial"></div><div class="label">Arena 2 — Palace</div></div>
       <div class="item"><div class="dot todo"></div><div class="label">Arena 3 — Destroyed City</div></div>
       <div class="item"><div class="dot todo"></div><div class="label">Arena 4 — TBA</div></div>
       <div class="item"><div class="dot todo"></div><div class="label">Arena 5 — TBA</div></div>
@@ -209,8 +210,8 @@
     <!-- COL 2: ENEMIES -->
     <div class="col">
       <div class="col-title">Enemies &amp; Bosses</div>
-      <div class="item"><div class="dot done"></div><div class="label dim">10 enemy types<small>done</small></div></div>
-      <div class="item"><div class="dot partial"></div><div class="label">Boss 1<small>in progress</small></div></div>
+      <div class="item"><div class="dot done"></div><div class="label dim">10 enemy types</div></div>
+      <div class="item"><div class="dot partial"></div><div class="label">Boss 1</div></div>
       <div class="item"><div class="dot todo"></div><div class="label">Boss 2</div></div>
       <div class="item"><div class="dot todo"></div><div class="label">Boss 3</div></div>
       <div class="item"><div class="dot todo"></div><div class="label">Facehugger</div></div>
@@ -235,29 +236,18 @@
     <!-- COL 4: LOCALIZATION -->
     <div class="col">
       <div class="col-title">Localization</div>
-      <div class="item"><div class="dot done"></div><div class="label dim">English<small>done</small></div></div>
+      <div class="item"><div class="dot done"></div><div class="label dim">English</div></div>
       <div class="item"><div class="dot todo"></div><div class="label">Czech, Slovak, Ukrainian, Polish, German, French, Spanish, Portuguese (Brazil), Turkish, Russian, Italian, Hungarian, Simplified Chinese, Japanese, Korean, Vietnamese, Thai</div></div>
-    </div>
-
-    <!-- COL 5: FULL RELEASE -->
-    <div class="col">
-      <div class="col-title">v1.0 — Q1 2027</div>
-      <div class="item"><div class="dot todo"></div><div class="label">All 6 arenas complete</div></div>
-      <div class="item"><div class="dot todo"></div><div class="label">All bosses &amp; enemies</div></div>
-      <div class="item"><div class="dot todo"></div><div class="label">All 18 languages</div></div>
-      <div class="item"><div class="dot todo"></div><div class="label">Full skill tree</div></div>
-	  <div class="item"><div class="dot todo"></div><div class="label">Challanges</div></div>
-      <div class="item"><div class="dot todo"></div><div class="label">Final balance and polishment</div></div>
     </div>
 
   </div>
 
   <!-- LEGEND -->
   <div class="rm-legend">
-    <div class="legend-item"><div class="dot done" style="width:12px;height:12px;font-size:8px;"></div> Done</div>
-    <div class="legend-item"><div class="dot partial" style="width:12px;height:12px;font-size:7px;"></div> In Progress</div>
-    <div class="legend-item"><div class="dot todo" style="width:12px;height:12px;"></div> Planned</div>
-    <div class="legend-item" style="margin-left:12px;color:#333">// roadmap subject to change &nbsp;·&nbsp; store.steampowered.com/app/4185750/BONETOX</div>
+    <div class="legend-item"><div class="dot done" style="width:18px;height:18px;font-size:11px;"></div> Done</div>
+    <div class="legend-item"><div class="dot partial" style="width:18px;height:18px;font-size:10px;"></div> In Progress</div>
+    <div class="legend-item"><div class="dot todo" style="width:18px;height:18px;"></div> Planned</div>
+    <div class="legend-item" style="margin-left:16px;color:#444">// roadmap subject to change &nbsp;·&nbsp; store.steampowered.com/app/4185750/BONETOX</div>
   </div>
 
 </div>

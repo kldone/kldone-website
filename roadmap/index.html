@@ -11,10 +11,10 @@
      DESIGN TOKENS
      ===================== */
   :root {
-    --bg:           #0a0a0a;
-    --surface:      #111111;
-    --surface2:     #181818;
-    --border:       #222222;
+    --bg:           #1c1c1c;
+    --surface:      #272727;
+    --surface2:     #2f2f2f;
+    --border:       #3a3a3a;
     --blood:        #8B0000;
     --blood-mid:    #B22222;
     --bone:         #d4c5a9;
@@ -24,8 +24,8 @@
     --done-glow:    rgba(74,158,106,0.15);
     --partial:      #c9a84c;
     --partial-glow: rgba(201,168,76,0.12);
-    --todo:         #333333;
-    --todo-border:  #2a2a2a;
+    --todo:         #3a3a3a;
+    --todo-border:  #2f2f2f;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,7 +35,7 @@
     color: var(--white);
     font-family: 'Source Sans 3', sans-serif;
     font-weight: 300;
-    font-size: 15px;
+    font-size: 22px;
     line-height: 1.6;
     min-height: 100vh;
   }
@@ -44,7 +44,7 @@
      LAYOUT
      ===================== */
   .page {
-    max-width: 1100px;
+    max-width: 70%;
     margin: 0 auto;
     padding: 48px 40px 80px;
   }
@@ -128,10 +128,31 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 12px;
+    font-size: 15px;
     color: var(--bone-dim);
     font-family: 'Share Tech Mono', monospace;
     letter-spacing: 0.05em;
+  }
+
+  .status.todo {
+    background: transparent;
+    border: 2px solid #555;
+  }
+
+  .phase-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 12pt;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .footer-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: #555;
+    letter-spacing: 0.1em;
   }
 
   /* =====================
@@ -166,7 +187,7 @@
 
   .status.todo {
     background: transparent;
-    border: 2px solid #333;
+    border: 2px solid #5a7a9a;
   }
 
   /* =====================
@@ -209,7 +230,7 @@
   .section-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
-    font-size: 11pt;
+    font-size: 14pt;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--white);
@@ -218,7 +239,7 @@
 
   .section-badge {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.1em;
     padding: 2px 8px;
     border-radius: 2px;
@@ -248,7 +269,7 @@
   .item:hover { background: rgba(255,255,255,0.02); }
 
   .item-text {
-    font-size: 13.5px;
+    font-size: 17px;
     color: var(--bone);
     padding-top: 1px;
     flex: 1;
@@ -257,7 +278,7 @@
   .item-text.done-text { color: var(--bone-dim); }
 
   .item-sub {
-    font-size: 11px;
+    font-size: 13px;
     color: #4a4a4a;
     font-family: 'Share Tech Mono', monospace;
     margin-top: 2px;
@@ -533,7 +554,7 @@
     <div class="phase-line ea-line"></div>
   </div>
 
-  <div class="grid one">
+  <div class="grid three">
 
     <!-- EA LEVELS -->
     <div class="section inprogress">
@@ -542,7 +563,7 @@
         <div class="section-title">Levels</div>
         <span class="section-badge badge-ea">EA Update</span>
       </div>
-      <div class="lang-grid">
+      <div class="items">
         <div class="item">
           <div class="status todo"></div>
           <div class="item-text">Arena 3 — Destroyed City
@@ -554,10 +575,6 @@
         <div class="item"><div class="status todo"></div><div class="item-text">Arena 6 — TBA</div></div>
       </div>
     </div>
-
-  </div>
-
-  <div class="grid">
 
     <!-- NEW ENEMIES -->
     <div class="section inprogress">

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONETOX — Roadmap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Share+Tech+Mono&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --bg:        #0d0d0d;
+    --surface:   #141414;
+    --border:    #222;
+    --blood:     #8B0000;
+    --blood-mid: #B22222;
+    --bone:      #d4c5a9;
+    --bone-dim:  #7a6a52;
+    --white:     #f0ece4;
+    --done:      #4a9e6a;
+    --partial:   #c9a84c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  /* OUTER BOX */
+  .roadmap {
+    width: 1060px;
+    background: var(--surface);
+    border: 1px solid #222;
+    border-top: 3px solid var(--blood);
+    overflow: hidden;
+  }
+
+  /* HEADER */
+  .rm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px 12px;
+    border-bottom: 1px solid var(--border);
+    background: #111;
+  }
+
+  .rm-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 15pt;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    text-shadow: 0 0 20px rgba(139,0,0,0.4);
+  }
+
+  .rm-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8.5pt;
+    letter-spacing: 0.3em;
+    color: var(--blood-mid);
+  }
+
+  .rm-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.2em;
+    color: var(--partial);
+    text-transform: uppercase;
+  }
+
+  /* COLUMNS */
+  .rm-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    border-top: none;
+  }
+
+  .col {
+    padding: 16px 18px;
+    border-right: 1px solid var(--border);
+  }
+
+  .col:last-child { border-right: none; }
+
+  .col-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 8.5pt;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blood-mid);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  /* ITEMS */
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 7px;
+  }
+
+  .item:last-child { margin-bottom: 0; }
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .dot.done {
+    background: var(--done);
+    box-shadow: 0 0 6px rgba(74,158,106,0.3);
+  }
+  .dot.done::after { content: '✓'; color: #000; }
+
+  .dot.partial {
+    background: transparent;
+    border: 2px solid var(--partial);
+  }
+  .dot.partial::after { content: '◐'; color: var(--partial); font-size: 8px; }
+
+  .dot.todo {
+    background: transparent;
+    border: 2px solid #2e2e2e;
+  }
+
+  .label {
+    font-size: 12px;
+    color: var(--bone);
+    line-height: 1.4;
+  }
+
+  .label.dim { color: var(--bone-dim); }
+
+  .label small {
+    display: block;
+    font-size: 10px;
+    color: #4a4a4a;
+    font-family: 'Share Tech Mono', monospace;
+    margin-top: 1px;
+  }
+
+  /* LEGEND */
+  .rm-legend {
+    display: flex;
+    gap: 20px;
+    padding: 10px 24px;
+    border-top: 1px solid var(--border);
+    background: #0f0f0f;
+    justify-content: flex-end;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--bone-dim);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="roadmap">
+
+  <!-- HEADER -->
+  <div class="rm-header">
+    <div>
+      <div class="rm-title">BONETOX</div>
+      <div class="rm-sub">// Early Access Roadmap</div>
+    </div>
+    <div class="rm-tag">Early Access — September 2026 &nbsp;·&nbsp; Full Release — Q1 2027</div>
+  </div>
+
+  <!-- COLUMNS -->
+  <div class="rm-cols">
+
+    <!-- COL 1: ARENAS -->
+    <div class="col">
+      <div class="col-title">Arenas</div>
+      <div class="item"><div class="dot done"></div><div class="label dim">Arena 1 — Hellscape<small>done</small></div></div>
+      <div class="item"><div class="dot partial"></div><div class="label">Arena 2 — Palace<small>in progress</small></div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Arena 3 — Destroyed City</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Arena 4 — TBA</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Arena 5 — TBA</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Arena 6 — TBA</div></div>
+    </div>
+
+    <!-- COL 2: ENEMIES -->
+    <div class="col">
+      <div class="col-title">Enemies &amp; Bosses</div>
+      <div class="item"><div class="dot done"></div><div class="label dim">10 enemy types<small>done</small></div></div>
+      <div class="item"><div class="dot partial"></div><div class="label">Boss 1<small>in progress</small></div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Boss 2</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Boss 3</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Facehugger</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Suicide Bomber</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Carnivorous Goat</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">+ more</div></div>
+    </div>
+
+    <!-- COL 3: CONTENT -->
+    <div class="col">
+      <div class="col-title">Content</div>
+      <div class="item"><div class="dot todo"></div><div class="label">Rocket Launcher</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Challenges mode</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Steam Achievements</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Controller + Aim Assist</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Improved HUD</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Dynamic Heavy Metal Music</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Enemy AI improvements</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Balance &amp; Optimizations</div></div>
+    </div>
+
+    <!-- COL 4: LOCALIZATION -->
+    <div class="col">
+      <div class="col-title">Localization</div>
+      <div class="item"><div class="dot done"></div><div class="label dim">English<small>done</small></div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Czech, Slovak, Ukrainian, Polish, German, French, Spanish, Portuguese (Brazil), Turkish, Russian, Italian, Hungarian, Simplified Chinese, Japanese, Korean, Vietnamese, Thai</div></div>
+    </div>
+
+    <!-- COL 5: FULL RELEASE -->
+    <div class="col">
+      <div class="col-title">v1.0 — Q1 2027</div>
+      <div class="item"><div class="dot todo"></div><div class="label">All 6 arenas complete</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">All bosses &amp; enemies</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">All 18 languages</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Full skill tree</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Steam Demo</div></div>
+      <div class="item"><div class="dot todo"></div><div class="label">Final balance and polishment</div></div>
+    </div>
+
+  </div>
+
+  <!-- LEGEND -->
+  <div class="rm-legend">
+    <div class="legend-item"><div class="dot done" style="width:12px;height:12px;font-size:8px;"></div> Done</div>
+    <div class="legend-item"><div class="dot partial" style="width:12px;height:12px;font-size:7px;"></div> In Progress</div>
+    <div class="legend-item"><div class="dot todo" style="width:12px;height:12px;"></div> Planned</div>
+    <div class="legend-item" style="margin-left:12px;color:#333">// roadmap subject to change &nbsp;·&nbsp; store.steampowered.com/app/4185750/BONETOX</div>
+  </div>
+
+</div>
+
+</body>
+</html>

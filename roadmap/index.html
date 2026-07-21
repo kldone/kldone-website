@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONETOX — Early Access Roadmap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  /* =====================
+     DESIGN TOKENS
+     ===================== */
+  :root {
+    --bg:           #0a0a0a;
+    --surface:      #111111;
+    --surface2:     #181818;
+    --border:       #222222;
+    --blood:        #8B0000;
+    --blood-mid:    #B22222;
+    --bone:         #d4c5a9;
+    --bone-dim:     #8a7a62;
+    --white:        #f0ece4;
+    --done:         #4a9e6a;
+    --done-glow:    rgba(74,158,106,0.15);
+    --partial:      #c9a84c;
+    --partial-glow: rgba(201,168,76,0.12);
+    --todo:         #333333;
+    --todo-border:  #2a2a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* =====================
+     LAYOUT
+     ===================== */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  /* =====================
+     HEADER
+     ===================== */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 120px; height: 2px;
+    background: var(--blood);
+  }
+
+  .header-left {}
+
+  .game-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 42pt;
+    letter-spacing: 0.18em;
+    color: var(--white);
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(139,0,0,0.5);
+  }
+
+  .roadmap-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9pt;
+    letter-spacing: 0.35em;
+    color: var(--blood-mid);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .release-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--partial);
+    margin-bottom: 4px;
+  }
+
+  .release-date {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 18pt;
+    letter-spacing: 0.1em;
+    color: var(--white);
+  }
+
+  /* =====================
+     LEGEND
+     ===================== */
+  .legend {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 40px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border-left: 3px solid var(--border);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--bone-dim);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* =====================
+     STATUS CIRCLES
+     ===================== */
+  .status {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .status.done {
+    background: var(--done);
+    box-shadow: 0 0 8px var(--done-glow);
+  }
+
+  .status.done::after { content: '✓'; color: #000; font-size: 11px; }
+
+  .status.partial {
+    background: transparent;
+    border: 2px solid var(--partial);
+    box-shadow: 0 0 6px var(--partial-glow);
+  }
+
+  .status.partial::after { content: '◐'; color: var(--partial); font-size: 10px; }
+
+  .status.todo {
+    background: transparent;
+    border: 2px solid #333;
+  }
+
+  /* =====================
+     GRID
+     ===================== */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .grid.three { grid-template-columns: 1fr 1fr 1fr; }
+  .grid.one { grid-template-columns: 1fr; }
+
+  /* =====================
+     SECTION
+     ===================== */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--blood);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .section.completed { border-top-color: var(--done); }
+  .section.inprogress { border-top-color: var(--partial); }
+  .section.planned { border-top-color: #333; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 11pt;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    flex: 1;
+  }
+
+  .section-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .badge-done { background: rgba(74,158,106,0.15); color: var(--done); }
+  .badge-progress { background: rgba(201,168,76,0.12); color: var(--partial); }
+  .badge-planned { background: rgba(255,255,255,0.04); color: #555; }
+  .badge-ea { background: rgba(139,0,0,0.2); color: var(--blood-mid); }
+
+  /* =====================
+     ITEMS
+     ===================== */
+  .items { padding: 10px 0; }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: background 0.15s;
+  }
+
+  .item:last-child { border-bottom: none; }
+  .item:hover { background: rgba(255,255,255,0.02); }
+
+  .item-text {
+    font-size: 13.5px;
+    color: var(--bone);
+    padding-top: 1px;
+    flex: 1;
+  }
+
+  .item-text.done-text { color: var(--bone-dim); }
+
+  .item-sub {
+    font-size: 11px;
+    color: #4a4a4a;
+    font-family: 'Share Tech Mono', monospace;
+    margin-top: 2px;
+    letter-spacing: 0.03em;
+  }
+
+  /* =====================
+     PHASE DIVIDERS
+     ===================== */
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 36px 0 16px;
+  }
+
+  .phase-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 9pt;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .phase-label.ea-label { color: var(--blood-mid); }
+  .phase-label.full-label { color: var(--partial); }
+  .phase-label.done-label { color: var(--done); }
+
+  .phase-line {
+    flex: 1;
+    height: 1px;
+  }
+
+  .phase-line.ea-line { background: linear-gradient(to right, var(--blood), transparent); }
+  .phase-line.full-line { background: linear-gradient(to right, var(--partial), transparent); }
+  .phase-line.done-line { background: linear-gradient(to right, var(--done), transparent); }
+
+  /* =====================
+     LANGUAGES GRID
+     ===================== */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 8px 0;
+  }
+
+  /* =====================
+     FOOTER
+     ===================== */
+  .footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 14pt;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    opacity: 0.3;
+  }
+
+  .footer-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #333;
+    letter-spacing: 0.1em;
+  }
+
+  /* =====================
+     PROGRESS BAR
+     ===================== */
+  .progress-bar-wrap {
+    margin: 0 18px 14px;
+    padding-top: 10px;
+  }
+
+  .progress-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--bone-dim);
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+  }
+
+  .progress-bar-bg {
+    height: 3px;
+    background: #222;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .fill-done { background: var(--done); }
+  .fill-partial { background: var(--partial); }
+
+  @media (max-width: 700px) {
+    .grid, .grid.three { grid-template-columns: 1fr; }
+    .page { padding: 24px 16px 48px; }
+    .game-title { font-size: 28pt; }
+    .lang-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="game-title">BONETOX</div>
+      <div class="roadmap-label">// Early Access Roadmap — 2026</div>
+    </div>
+    <div class="header-right">
+      <div class="release-tag">Early Access</div>
+      <div class="release-date">September 2026</div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="status done"></div> Completed
+    </div>
+    <div class="legend-item">
+      <div class="status partial"></div> In Progress
+    </div>
+    <div class="legend-item">
+      <div class="status todo"></div> Planned
+    </div>
+  </div>
+
+  <!-- ==================== COMPLETED ==================== -->
+  <div class="phase-header">
+    <span class="phase-label done-label">Already in Early Access</span>
+    <div class="phase-line done-line"></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- LEVELS -->
+    <div class="section inprogress">
+      <div class="section-header">
+        <div class="status partial"></div>
+        <div class="section-title">Levels</div>
+        <span class="section-badge badge-progress">1 of 6</span>
+      </div>
+      <div class="items">
+        <div class="item">
+          <div class="status done"></div>
+          <div class="item-text done-text">Arena 1 — Hellscape
+            <div class="item-sub">15 waves · blood pools · spike traps · dynamic events</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="status partial"></div>
+          <div class="item-text">Arena 2 — Palace
+            <div class="item-sub">exploding walls · dungeon basement · vertical combat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENEMIES -->
+    <div class="section inprogress">
+      <div class="section-header">
+        <div class="status partial"></div>
+        <div class="section-title">Enemies</div>
+        <span class="section-badge badge-progress">10 types + boss</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Melee Brute</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Fireball Thrower</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Laser Enemy</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Flamethrower</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Flying Melee</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Flying Ranged</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Executioner (Heavy Melee)</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Martyr (Ammo/Health drops)</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Big Spider</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Spider Swarm</div></div>
+        <div class="item"><div class="status partial"></div><div class="item-text">Boss 1 — In Progress</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid three">
+
+    <!-- WEAPONS -->
+    <div class="section completed">
+      <div class="section-header">
+        <div class="status done"></div>
+        <div class="section-title">Arsenal</div>
+        <span class="section-badge badge-done">Complete</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Pistol</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Double Barrel Shotgun</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">SMG</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">LMG</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Sniper Rifle (Tier 1 + 2)</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Grenade Launcher</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Laser Weapon</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Grenades</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Missile</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Sledgehammer (Melee)</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Chainsaw (Melee)</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Rocket Launcher <span style="color:#444;font-size:11px">(EA)</span></div></div>
+      </div>
+    </div>
+
+    <!-- CORE SYSTEMS -->
+    <div class="section completed">
+      <div class="section-header">
+        <div class="status done"></div>
+        <div class="section-title">Core Systems</div>
+        <span class="section-badge badge-done">Complete</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Wave system with 15 waves</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Gore system (bones, blood, VFX)</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Physics destruction (Chaos)</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Dash with damage</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Skill tree progression</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Score system</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Steam Leaderboards</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Melee resource system</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Environmental traps</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Power-ups</div></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="section completed">
+      <div class="section-header">
+        <div class="status done"></div>
+        <div class="section-title">Settings & UI</div>
+        <span class="section-badge badge-done">Complete</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Audio settings</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Video / graphics settings</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Mouse sensitivity settings</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Keyboard customization</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Sandbox mode</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Photo mode</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Pause menu</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">Main menu</div></div>
+        <div class="item"><div class="status done"></div><div class="item-text done-text">How to play screen</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== EARLY ACCESS ==================== -->
+  <div class="phase-header">
+    <span class="phase-label ea-label">During Early Access</span>
+    <div class="phase-line ea-line"></div>
+  </div>
+
+  <div class="grid one">
+
+    <!-- EA LEVELS -->
+    <div class="section inprogress">
+      <div class="section-header">
+        <div class="status partial"></div>
+        <div class="section-title">Levels</div>
+        <span class="section-badge badge-ea">EA Update</span>
+      </div>
+      <div class="lang-grid">
+        <div class="item">
+          <div class="status todo"></div>
+          <div class="item-text">Arena 3 — Destroyed City
+            <div class="item-sub">high-rise ruins · river of blood · orange/red/gray aesthetic</div>
+          </div>
+        </div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Arena 4 — TBA</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Arena 5 — TBA</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Arena 6 — TBA</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid">
+
+    <!-- NEW ENEMIES -->
+    <div class="section inprogress">
+      <div class="section-header">
+        <div class="status partial"></div>
+        <div class="section-title">New Enemies &amp; Bosses</div>
+        <span class="section-badge badge-ea">EA Update</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status todo"></div><div class="item-text">Facehugger
+          <div class="item-sub">attaches for 5s · vision blocked · damage over time</div>
+        </div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Suicide Bomber
+          <div class="item-sub">slow · massive explosion · priority threat</div>
+        </div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Ranged Soldier
+          <div class="item-sub">keeps distance · tactical retreat behavior</div>
+        </div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Carnivorous Goat
+          <div class="item-sub">charges at full speed · knockback everything in path</div>
+        </div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Grenade Thrower</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Multi-Projectile Head
+          <div class="item-sub">fires 3-5 projectiles simultaneously</div>
+        </div></div>
+        <div class="item"><div class="status todo"></div>
+          <div class="item-text" style="color:var(--partial)">Boss 2 — TBA</div>
+        </div>
+        <div class="item"><div class="status todo"></div>
+          <div class="item-text" style="color:var(--partial)">Boss 3 — TBA</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT UPDATES -->
+    <div class="section inprogress">
+      <div class="section-header">
+        <div class="status partial"></div>
+        <div class="section-title">Content &amp; Features</div>
+        <span class="section-badge badge-ea">EA Update</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status todo"></div><div class="item-text">Rocket Launcher weapon</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Bombardment power-up</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">More skills (dash upgrade, barrel skills)</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Challenges mode
+          <div class="item-sub">special leaderboards · locked loadouts · survival conditions</div>
+        </div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Steam Achievements</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Dynamic heavy metal music</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Controller support + aim assist</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Improved HUD design</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Improved enemy AI
+          <div class="item-sub">pathfinding · flanking · ranged keep-distance</div>
+        </div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Gameplay balance based on player feedback</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Performance optimizations</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LOCALIZATION -->
+  <div class="grid one">
+    <div class="section inprogress">
+      <div class="section-header">
+        <div class="status partial"></div>
+        <div class="section-title">Localization</div>
+        <span class="section-badge badge-ea">EA Update</span>
+      </div>
+      <div class="lang-grid">
+        <div class="item"><div class="status done"></div><div class="item-text done-text">English</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Czech</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">German</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">French</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Spanish (Spain)</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Polish</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Russian</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Portuguese (Brazil)</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Italian</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Hungarian</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Slovak</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Ukrainian</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Simplified Chinese</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Japanese</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Korean</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Turkish</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Vietnamese</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Thai</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FULL RELEASE ==================== -->
+  <div class="phase-header">
+    <span class="phase-label full-label">Full Release — Q1 2027</span>
+    <div class="phase-line full-line"></div>
+  </div>
+
+  <div class="grid three">
+
+    <div class="section planned">
+      <div class="section-header">
+        <div class="status todo"></div>
+        <div class="section-title">Complete Arsenal</div>
+        <span class="section-badge badge-planned">Full Release</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status todo"></div><div class="item-text">All weapons polished and balanced</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Full skill tree for all weapons</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">All power-ups implemented</div></div>
+      </div>
+    </div>
+
+    <div class="section planned">
+      <div class="section-header">
+        <div class="status todo"></div>
+        <div class="section-title">Polish &amp; Balance</div>
+        <span class="section-badge badge-planned">Full Release</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status todo"></div><div class="item-text">Full HUD redesign</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Arena director system</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Weapon balance final pass</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Performance final optimizations</div></div>
+      </div>
+    </div>
+
+    <div class="section planned">
+      <div class="section-header">
+        <div class="status todo"></div>
+        <div class="section-title">Platform &amp; Community</div>
+        <span class="section-badge badge-planned">Full Release</span>
+      </div>
+      <div class="items">
+        <div class="item"><div class="status todo"></div><div class="item-text">Steam Demo</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">All 18 languages complete</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Full controller support</div></div>
+        <div class="item"><div class="status todo"></div><div class="item-text">Console ports (TBD)</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">BONETOX</div>
+    <div class="footer-note">// roadmap subject to change based on player feedback &nbsp;·&nbsp; store.steampowered.com/app/4185750/BONETOX</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -292,21 +292,54 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    margin: 36px 0 16px;
+    margin: 36px 0 0;
+    cursor: pointer;
+    user-select: none;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: background 0.2s;
   }
+
+  .phase-header:hover { background: var(--surface2); }
 
   .phase-label {
     font-family: 'Oswald', sans-serif;
-    font-weight: 500;
-    font-size: 9pt;
-    letter-spacing: 0.4em;
+    font-weight: 600;
+    font-size: 28pt;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     white-space: nowrap;
+    flex: 1;
   }
 
   .phase-label.ea-label { color: var(--blood-mid); }
   .phase-label.full-label { color: var(--partial); }
   .phase-label.done-label { color: var(--done); }
+
+  .phase-toggle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13pt;
+    color: var(--bone-dim);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .phase-toggle.collapsed { transform: rotate(-90deg); }
+
+  .phase-content {
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    max-height: 9999px;
+    opacity: 1;
+    margin-bottom: 16px;
+  }
+
+  .phase-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+  }
 
   .phase-line {
     flex: 1;
@@ -426,10 +459,13 @@
   </div>
 
   <!-- ==================== COMPLETED ==================== -->
-  <div class="phase-header">
+  <div class="phase-header" onclick="toggleSection('section-done')">
     <span class="phase-label done-label">Already in Early Access</span>
-    <div class="phase-line done-line"></div>
+    <span class="phase-toggle" id="toggle-done">▼</span>
   </div>
+
+  <div class="phase-content" id="section-done">
+  <div style="height:16px"></div>
 
   <div class="grid">
 
@@ -548,11 +584,16 @@
 
   </div>
 
+  </div><!-- end section-done -->
+
   <!-- ==================== EARLY ACCESS ==================== -->
-  <div class="phase-header">
+  <div class="phase-header" onclick="toggleSection('section-ea')">
     <span class="phase-label ea-label">During Early Access</span>
-    <div class="phase-line ea-line"></div>
+    <span class="phase-toggle" id="toggle-ea">▼</span>
   </div>
+
+  <div class="phase-content" id="section-ea">
+  <div style="height:16px"></div>
 
   <div class="grid three">
 
@@ -668,6 +709,8 @@
     </div>
   </div>
 
+  </div><!-- end section-ea -->
+
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-brand">BONETOX</div>
@@ -675,5 +718,16 @@
   </div>
 
 </div>
+<script>
+  function toggleSection(id) {
+    const content = document.getElementById(id);
+    const sectionName = id.replace('section-', '');
+    const toggle = document.getElementById('toggle-' + sectionName);
+    const isCollapsed = content.classList.contains('collapsed');
+    content.classList.toggle('collapsed');
+    toggle.classList.toggle('collapsed');
+    toggle.textContent = isCollapsed ? '▼' : '▶';
+  }
+</script>
 </body>
 </html>
